@@ -83,6 +83,7 @@ body {
     margin: 0;
     border: 0px;
     outline: 0px;
+    color: var(--white);
   }
 }
 
