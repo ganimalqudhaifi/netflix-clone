@@ -1,4 +1,5 @@
 import Banner from "@/components/Banner";
+import Card from "@/components/Card";
 import Navbar from "@/components/Navbar";
 import Head from "next/head";
 
@@ -18,7 +19,9 @@ export default function Home() {
         imgUrl="/static/clifford.webp"
       />
 
-      {/* <Card /> */}
+      <Card imgUrl="/static/clifford.webp" size="small" />
+      <Card size="medium" />
+      <Card imgUrl="/static/clifford.webp" size="large" />
     </div>
   );
 }
