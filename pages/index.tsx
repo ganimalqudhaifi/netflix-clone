@@ -1,9 +1,21 @@
 import Banner from "@/components/Banner";
-import Card from "@/components/Card";
 import Navbar from "@/components/Navbar";
+import SectionCards from "@/components/SectionCards";
 import Head from "next/head";
 
 export default function Home() {
+  const disneyVideos = [
+    {
+      imgUrl: '/static/clifford.webp'
+    },
+    {
+      imgUrl: '/static/clifford.webp'
+    },
+    {
+      imgUrl: '/static/clifford.webp'
+    },
+  ]
+  
   return (
     <div>
       <Head>
@@ -19,9 +31,9 @@ export default function Home() {
         imgUrl="/static/clifford.webp"
       />
 
-      <Card imgUrl="/static/clifford.webp" size="small" />
-      <Card size="medium" />
-      <Card imgUrl="/static/clifford.webp" size="large" />
+      <div className="mt-6">
+        <SectionCards title="Disney" videos={disneyVideos}/>
+      </div>
     </div>
   );
 }
