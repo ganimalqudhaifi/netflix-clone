@@ -1,16 +1,26 @@
+import { magic } from "@/lib/magic-client";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 
-interface NavbarProps {
-  username: string,
-}
-
-export default function Navbar({ username }: NavbarProps) {
+export default function Navbar() {
   const [showDropdown, setShowDropdown] = useState(false);
+  const [username, setUsername] = useState("");
 
   const router = useRouter();
+
+  useEffect(() => {
+    async function getUserName() {
+      try {
+        const { email } = await magic.user.getMetadata();
+        setUsername(email!);
+      } catch (error) {
+        console.error("Error retrieving email", error)
+      }
+    }
+    getUserName();
+  }, [])
 
   const handleOnClickHome = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -25,6 +35,14 @@ export default function Navbar({ username }: NavbarProps) {
   const handleShowDropdown = () => {
     setShowDropdown(!showDropdown);
   };
+
+  const handleSignOut = async () => {
+    try {
+      await magic.user.logout();
+    } catch (error) {
+      console.error("Error logging out", error)
+    }
+  }
   
   return (
     <div className="text-white10 fixed bg-gradient-to-b from-black to-transparent w-full z-50 top-0">
@@ -62,7 +80,7 @@ export default function Navbar({ username }: NavbarProps) {
             {showDropdown && (
               <div className="absolute bg-black50 border text-white rounded border-blue shadow-shadow30 ml-auto mt-2 pr-2 py-2">
                 <div>
-                  <Link href="/login" className="transition ease-in-out duration-200 block text-base leading-5 rounded cursor-pointer px-2 hover:underline">Sign out</Link>
+                  <Link href="/login" className="transition ease-in-out duration-200 block text-base leading-5 rounded cursor-pointer px-2 hover:underline" onClick={handleSignOut}>Sign out</Link>
                   <div className="py-2"></div>
                 </div>
               </div>

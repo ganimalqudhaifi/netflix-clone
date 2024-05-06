@@ -21,7 +21,6 @@ export async function getServerSideProps() {
 }
 
 export default function Home({ disneyVideos, productivityVideos, travelVideos, popularVideos }: HomeProps) {
-
   return (
     <div>
       <Head>

@@ -43,6 +43,12 @@ const config: Config = {
         'shadow30': "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
       }
     },
+    keyframes: {
+      load7: {
+        '0%, 80%, 100%': { boxShadow: '0 2.5em 0 -1.3em' },
+        '40%': { boxShadow: '0 2.5em 0 0' }
+      }
+    }
   },
   plugins: [],
 };
