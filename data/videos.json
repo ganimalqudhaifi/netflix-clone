@@ -1,0 +1,182 @@
+{
+  "kind": "youtube#searchListResponse",
+  "etag": "1KptvnAFyJcVkmY-CIp4NvvPIO0",
+  "nextPageToken": "CAUQAA",
+  "regionCode": "ID",
+  "pageInfo": {
+    "totalResults": 1000000,
+    "resultsPerPage": 5
+  },
+  "items": [
+    {
+      "kind": "youtube#searchResult",
+      "etag": "Vm9KGWns-Zz4xXPr51Mo0sWMUBg",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "MjQG-a7d41Q"
+      },
+      "snippet": {
+        "publishedAt": "2024-04-29T12:31:34Z",
+        "channelId": "UCuaFvcY4MhZY3U43mMt1dYQ",
+        "title": "Mufasa: The Lion King | Teaser Trailer",
+        "description": "A lion who would change our lives forever. #Mufasa: The Lion King, in theaters December 20. “Mufasa: The Lion King” enlists ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/MjQG-a7d41Q/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/MjQG-a7d41Q/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/MjQG-a7d41Q/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Walt Disney Studios",
+        "liveBroadcastContent": "none",
+        "publishTime": "2024-04-29T12:31:34Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "g4OteFIz14Q495Ce2XMyM6S72Xs",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "sHxl6eDYLUs"
+      },
+      "snippet": {
+        "publishedAt": "2024-04-30T01:00:02Z",
+        "channelId": "UCuaFvcY4MhZY3U43mMt1dYQ",
+        "title": "Let It Be | Official Trailer | Disney+",
+        "description": "See The Beatles like never before. Let It Be, fully restored for the first time, is streaming May 8 only on Disney+.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/sHxl6eDYLUs/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/sHxl6eDYLUs/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/sHxl6eDYLUs/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Walt Disney Studios",
+        "liveBroadcastContent": "none",
+        "publishTime": "2024-04-30T01:00:02Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "SZpNWZpmT9ZxXyODvUawPO6mur0",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "LEjhY15eCx0"
+      },
+      "snippet": {
+        "publishedAt": "2024-03-07T17:00:10Z",
+        "channelId": "UC_IRYSp4auq7hKLvziWVH6w",
+        "title": "Inside Out 2 | Official Trailer",
+        "description": "make room for new emotions   Watch the new trailer for Disney & Pixar's Inside Out 2, only in theaters June 14! #Insideout2 The ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/LEjhY15eCx0/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/LEjhY15eCx0/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/LEjhY15eCx0/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Pixar",
+        "liveBroadcastContent": "none",
+        "publishTime": "2024-03-07T17:00:10Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "bfH7i3-TYQeqiFC299uQvcbLUss",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "oyRxxpD3yNw"
+      },
+      "snippet": {
+        "publishedAt": "2023-09-27T16:00:40Z",
+        "channelId": "UC_976xMxPgzIa290Hqtk-9g",
+        "title": "Wish | Official Trailer",
+        "description": "Be careful what you wish for ⭐️ Watch the NEW trailer for Disney's #Wish, coming only to theaters this Thanksgiving. Revealed ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/oyRxxpD3yNw/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/oyRxxpD3yNw/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/oyRxxpD3yNw/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Walt Disney Animation Studios",
+        "liveBroadcastContent": "none",
+        "publishTime": "2023-09-27T16:00:40Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "N-fWNco8sD1fhCJfUimGuSVLOOY",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "mB5efZKWIrU"
+      },
+      "snippet": {
+        "publishedAt": "2024-02-13T17:00:16Z",
+        "channelId": "UC_976xMxPgzIa290Hqtk-9g",
+        "title": "Iwájú | Official Trailer | Disney+",
+        "description": "Journey to a world where nothing is as it seems with #Iwájú, an all-new limited series from Disney Animation and @Kugalimedia.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/mB5efZKWIrU/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/mB5efZKWIrU/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/mB5efZKWIrU/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Walt Disney Animation Studios",
+        "liveBroadcastContent": "none",
+        "publishTime": "2024-02-13T17:00:16Z"
+      }
+    }
+  ]
+}
