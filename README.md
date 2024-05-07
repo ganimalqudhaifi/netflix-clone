@@ -2,6 +2,7 @@
 - React Bootstrap
 - TailwindCSS
 - Framer Motion
+- React Modal
 
 ## library
 - Youtube API

@@ -29,11 +29,12 @@ export default function Home({ disneyVideos, productivityVideos, travelVideos, p
         <link rel="icon" href="/favicon.ico"/>
       </Head>
       <div className="pb-16">
-        <Navbar username="ganimalqudhaifi@gan.com"/>
+        <Navbar/>
         <Banner 
           title="Clifford the red dog" 
           subTitle="a very cute dog" 
           imgUrl="/static/clifford.webp"
+          videoId="4zH5iYM4wJo"
         />
 
         <div className="mt-6">
