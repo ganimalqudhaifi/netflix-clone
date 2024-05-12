@@ -33,24 +33,33 @@ export default function Login() {
   const handleLoginWithEmail = async () => {
     if (email) {
       // route to dashboard
-      if (true) {
-        try {
-          setIsLoading(true);
-          if (magic !== undefined) {
-            const didToken = await magic.auth.loginWithMagicLink({ email });
-            if (didToken) {          
+      try {
+        setIsLoading(true);
+        if (magic !== undefined) {
+          const didToken = await magic.auth.loginWithMagicLink({ email });
+          if (didToken) {          
+            const response = await  fetch("/api/login", {
+              method: "POST",
+              headers: {
+                'Authorization': `Bearer ${didToken}`,
+                "Content-Type": "application/json"
+              }
+            })
+
+            const loggedInResponse = await response.json();
+            if (loggedInResponse.done) {
               router.push("/"); // if the did token was created route to homepage
+            } else {
+              setIsLoading(false);
+              setUserMsg("Something went wrong logging in")
             }
           }
-        } catch (error) {
-          // Handle errors if required!
-          console.error("Something went wrong logging in", error)
-          setIsLoading(false);              
-        }        
-      } else {
-        setIsLoading(false); 
-        setUserMsg("Something went wrong logging in")
-      }
+        }
+      } catch (error) {
+        // Handle errors if required!
+        console.error("Something went wrong logging in", error)
+        setIsLoading(false);              
+      }        
     } else {
       // show user message 
       setIsLoading(false); 

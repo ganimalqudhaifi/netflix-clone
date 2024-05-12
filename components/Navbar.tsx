@@ -13,7 +13,7 @@ export default function Navbar() {
   useEffect(() => {
     async function getUserName() {
       try {
-        const { email } = await magic.user.getMetadata();
+        const { email } = await magic.user.getInfo();
         setUsername(email!);
       } catch (error) {
         console.error("Error retrieving email", error)
