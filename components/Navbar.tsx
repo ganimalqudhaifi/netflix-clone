@@ -1,12 +1,14 @@
-import { magic } from "@/lib/magic-client";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { SyntheticEvent, useEffect, useState } from "react";
+
+import { magic } from "@/lib/magic-client";
 
 export default function Navbar() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [username, setUsername] = useState("");
+  const [didToken, setDidToken] = useState("");
 
   const router = useRouter();
 
@@ -38,9 +40,18 @@ export default function Navbar() {
 
   const handleSignOut = async () => {
     try {
-      await magic.user.logout();
+      const response = await fetch("/api/logout", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${didToken}`,
+          'Content-Type': "application/json",
+        }
+      });
+  
+      const res = await response.json();
     } catch (error) {
-      console.error("Error logging out", error)
+      console.error("Error logging out", error);
+      router.push("/login")
     }
   }
   
@@ -72,7 +83,7 @@ export default function Navbar() {
               <p className="text-base">{username}</p>
               <Image
                 src="/static/expand_more.svg"
-                alt="Expand more"
+                alt="Expand dropdown"
                 width={24}
                 height={24}
               />

@@ -1,10 +1,11 @@
-import Loading from "@/components/Loading";
-import { magic } from "@/lib/magic-client";
-import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import { Roboto_Slab } from "next/font/google";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { Roboto_Slab } from "next/font/google";
+
+import "@/styles/globals.css";
+import Loading from "@/components/Loading";
+import { magic } from "@/lib/magic-client";
 
 const RobotoSlab = Roboto_Slab({ subsets: ["latin"] });
 
@@ -25,18 +26,18 @@ export default function App({ Component, pageProps }: AppProps) {
     isLoggedIn();
   }, [])
 
-  // useEffect(() => {
-  //   const handleRouteChange = () => {
-  //     setIsLoading(false);
-  //   }
-  //   router.events.on("routeChangeStart", handleRouteChange);
-  //   router.events.on("routeChangeError", handleRouteChange);
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setIsLoading(false);
+    }
+    router.events.on("routeChangeStart", handleRouteChange);
+    router.events.on("routeChangeError", handleRouteChange);
 
-  //   return () => {
-  //     router.events.off("routeChangeStart", handleRouteChange);
-  //     router.events.off("routeChangeError", handleRouteChange);
-  //   }
-  // }, [router]);
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChange);
+      router.events.off("routeChangeError", handleRouteChange);
+    }
+  }, [router]);
 
   if (isLoading) {
     return <Loading />
