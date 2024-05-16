@@ -8,27 +8,19 @@ import { getPopularVideos, getVideos, getWatchItAgainVideos } from '@/lib/videos
 import { redirectUser } from "@/utils/redirectUser";
 
 interface HomeProps { 
-  disneyVideos: any, //TODO!: change it later
-  productivityVideos: any, //TODO!: change it later
-  travelVideos: any, //TODO!: change it later
-  popularVideos: any, //TODO!: change it later
-  watchItAgainVideos: any, //TODO!: change it later
+  disneyVideos: [Video],
+  productivityVideos: [Video],
+  travelVideos: [Video],
+  popularVideos: [Video],
+  watchItAgainVideos: [Video],
 } 
 
 export const getServerSideProps = (async (context) => {
   const { userId, token } = await redirectUser(context);
+  
 
-  if (!userId) {
-    return {
-      props: {},
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      }
-    }
-  }
 
-  const watchItAgainVideos = await getWatchItAgainVideos(userId, token);
+  const watchItAgainVideos = await getWatchItAgainVideos(userId!, token!);
   const disneyVideos = await getVideos("disney videos");
   const productivityVideos = await getVideos("Productivity");
   const travelVideos = await getVideos("travel");

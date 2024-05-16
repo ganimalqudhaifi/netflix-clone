@@ -2,13 +2,13 @@ import { verifyToken } from '@/lib/utils';
 import type { GetServerSidePropsContext } from 'next';
 
 interface RedirectUserResult {
-  userId: string,
-  token: string | null | undefined
+  userId: string | null,
+  token: string | null,
 }
 
 export async function redirectUser(context: GetServerSidePropsContext): Promise<RedirectUserResult> {
-  const token = context.req ? context.req.cookies.token : null;
-  const userId = await verifyToken(token);
+  const token = context.req.cookies.token ?? null;
+  let userId = typeof token === 'string' ? await verifyToken(token) : null;
 
   return {
     userId,

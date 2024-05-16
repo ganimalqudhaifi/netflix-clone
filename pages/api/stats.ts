@@ -1,16 +1,19 @@
+import type { NextApiRequest, NextApiResponse } from 'next'
+
 import { verifyToken } from '@/lib/utils';
 import { findVideoIdByUser, insertStats, updateStats } from '@/lib/db/hasura';
 
-export default async function stats(req, res) {
+export default async function stats(req: NextApiRequest, res: NextApiResponse) {
   const token = req.cookies.token;
   try {
     if (!token) {
       res.status(403).send({})
     } else {
+      const userId = await verifyToken(token);
       const inputParams = req.method === "POST" ? req.body : req.query;
       const { videoId } = inputParams;
-      if (videoId) {
-        const userId = await verifyToken(token);
+      
+      if (videoId && userId) {
   
         const findVideo = await findVideoIdByUser(token, userId, videoId);
         const doesStatsExist = findVideo?.length > 0;
@@ -48,6 +51,6 @@ export default async function stats(req, res) {
     }
   } catch (error) {
     console.error("Error occured /stats", error);
-    res.status(500).send({ done: false, error: error?.message });
+    res.status(500).send({ done: false, error });
   }
 }

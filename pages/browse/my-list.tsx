@@ -8,19 +8,17 @@ import { getMyList } from "@/lib/videos";
 
 export const getServerSideProps = (async (context) => {
   const { userId, token } = await redirectUser(context);
-  
-  if (!userId) {
+
+  if (!userId || !token) {
     return {
-      props: {},
-      redirect: {
-        destination: "/login",
-        permanent: false,
+      props: {
+        myListVideos: [],
       }
     }
   }
 
   const videos = await getMyList(userId, token);
-  
+    
   return {
     props: {
       myListVideos: videos,
@@ -31,7 +29,7 @@ export const getServerSideProps = (async (context) => {
 
 
 interface MyListProps {
-  myListVideos: any //TODO!: change it later
+  myListVideos: [Video]
 }
 
 export default function MyList({ myListVideos }: MyListProps) {

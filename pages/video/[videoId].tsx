@@ -6,28 +6,38 @@ import LikeIcon from '@/components/icons/LikeIcon';
 import DislikeIcon from '@/components/icons/DislikeIcon';
 import { getYoutubeVideoById } from "@/lib/videos";
 import { useEffect, useState } from 'react';
+import type { GetStaticProps } from 'next';
 
 Modal.setAppElement('#__next');
 
 interface VideoProps {
-  video: any //TODO!: change it later
+  video: Video
 }
 
-export async function getStaticProps(context) {
-  const videoId = context.params.videoId;
+export const getStaticProps = (async (context) => {
+  const videoId = context.params?.videoId;
+
+  if (!videoId) {
+    return {
+      props: {
+        video: {}
+      }
+    }
+  }
+
   const videoArray = await getYoutubeVideoById(videoId)
 
   return {
     props: {
-      video: videoArray.length > 0 ? videoArray[0] : {},
+      video: videoArray[0],
     },
     revalidate: 10, // In seconds
   }
-}
+}) satisfies GetStaticProps
 
 export async function getStaticPaths() {
   const listOfVideos = ["mYfJxlgR2jw", "4zH5iYM4wJo", "KCPEHsAViiQ"];
-  const paths = listOfVideos.map((videoId) => ({
+  const paths = listOfVideos?.map((videoId) => ({
     params: {videoId},
   }))
 
@@ -107,9 +117,8 @@ export default function Video({ video }: VideoProps) {
         className="absolute w-full md:w-[800px] lg:w-1/2 lg:top-[10%] lg:bottom-10 bg-black40 border border-shadow10 mx-auto my-0 rounded-[10px] border-solid top-[10%] bottom-10 inset-x-0"
         overlayClassName="w-full h-screen inset-0"
       >
-        <div><iframe id="ytplayer" type="text/html" width="100%" height="360" className="shadow-[0_3px_7px] shadow-shadow20 bg-clip-padding opacity-100 bg-gradient-to-t from-black10 to-transparent rounded"
-  src={`https://www.youtube.com/embed/${videoId}?controls=0&rel=1&autoplay=1&origin=http://example.com`}
-  frameborder="0"></iframe></div>
+        <div><iframe id="ytplayer" width="100%" height="360" className="shadow-[0_3px_7px] shadow-shadow20 bg-clip-padding opacity-100 bg-gradient-to-t from-black10 to-transparent rounded"
+  src={`https://www.youtube.com/embed/${videoId}?controls=0&rel=1&autoplay=1&origin=http://example.com`}></iframe></div>
 
         <div className='flex absolute mb-3 pl-4 top-[35%]'>
           <button onClick={handleToggleLike}>

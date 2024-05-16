@@ -1,10 +1,12 @@
+import type { NextApiRequest, NextApiResponse } from 'next'
+
 import jwt from 'jsonwebtoken';
 
 import { magicAdmin } from "@/lib/magic";
 import { setTokenCookie } from '@/lib/cookies';
 import { isNewUser, createNewUser } from '@/lib/db/hasura';
 
-export default async function login(req, res) {
+export default async function login(req: NextApiRequest, res: NextApiResponse) {
   if(req.method === "POST") {
     try {
       const auth = req.headers.authorization;
@@ -21,7 +23,7 @@ export default async function login(req, res) {
           "x-hasura-default-role": "users",  
           "x-hasura-user-id": `${metadata.issuer}`
         }
-      }, process.env.JWT_SECRET);
+      }, process.env.JWT_SECRET as string);
       
       const isNewUserQuery = await isNewUser(token, metadata.issuer);
       isNewUserQuery && (await createNewUser(token, metadata))
@@ -32,6 +34,6 @@ export default async function login(req, res) {
       res.status(500).send({ done: false })
     }
   } else {
-    res.status({ done: false })
+    res.send({ done: false })
   }
 }

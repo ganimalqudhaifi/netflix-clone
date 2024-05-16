@@ -15,7 +15,9 @@ export default function Navbar() {
   useEffect(() => {
     async function getUserName() {
       try {
-        const { email } = await magic.user.getInfo();
+        const { email } = await magic.user.getInfo(); 
+        const didToken = await magic.user.getIdToken();
+        setDidToken(didToken);
         setUsername(email!);
       } catch (error) {
         console.error("Error retrieving email", error)
@@ -49,6 +51,7 @@ export default function Navbar() {
       });
   
       const res = await response.json();
+      console.log({res})
     } catch (error) {
       console.error("Error logging out", error);
       router.push("/login")
