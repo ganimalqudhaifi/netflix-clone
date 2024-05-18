@@ -1,16 +1,24 @@
-async function queryHasuraGQL(operationsDoc: string, operationName: string, variables: GQLVariables, token: string) {
-  const result = await fetch(process.env.NEXT_PUBLIC_HASURA_ADMIN_URL as string, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-type": "application/json"
-    },
-    body: JSON.stringify({
-      query: operationsDoc,
-      variables: variables,
-      operationName: operationName,
-    }),
-  });
+async function queryHasuraGQL(
+  operationsDoc: string,
+  operationName: string,
+  variables: GQLVariables,
+  token: string
+) {
+  const result = await fetch(
+    process.env.NEXT_PUBLIC_HASURA_ADMIN_URL as string,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        query: operationsDoc,
+        variables: variables,
+        operationName: operationName,
+      }),
+    }
+  );
 
   return await result.json();
 }
@@ -26,13 +34,18 @@ export async function isNewUser(token: string, issuer: string | null) {
     }
   `;
 
-  const response = await queryHasuraGQL(operationsDoc, "isNewUser", { issuer }, token);
+  const response = await queryHasuraGQL(
+    operationsDoc,
+    "isNewUser",
+    { issuer },
+    token
+  );
 
   return response?.data?.users?.length === 0;
 }
 
 export async function createNewUser(token: string, metadata: Metadata) {
-  const { issuer, email, publicAddress } = metadata
+  const { issuer, email, publicAddress } = metadata;
   const operationsDoc = `
     mutation createNewUser($issuer: String!, $email: String!, $publicAddress: String!) {
       insert_users(objects: {
@@ -49,12 +62,21 @@ export async function createNewUser(token: string, metadata: Metadata) {
     }
   `;
 
-  const response = await queryHasuraGQL(operationsDoc, "createNewUser", { issuer, email, publicAddress }, token);
-  
+  const response = await queryHasuraGQL(
+    operationsDoc,
+    "createNewUser",
+    { issuer, email, publicAddress },
+    token
+  );
+
   return response;
 }
 
-export async function findVideoIdByUser(token: string, userId: string, videoId: string) {
+export async function findVideoIdByUser(
+  token: string,
+  userId: string,
+  videoId: string
+) {
   const operationsDoc = `
   query findVideoIdByUserId($userId: String!, $videoId: String!) {
     stats(where: { userId: {_eq: $userId}, videoId: {_eq: $videoId }}) {
@@ -107,7 +129,10 @@ export async function insertStats(
   );
 }
 
-export async function updateStats(token: string, { favourited, userId, watched, videoId }: StatsPayload) {
+export async function updateStats(
+  token: string,
+  { favourited, userId, watched, videoId }: StatsPayload
+) {
   const operationsDoc = `
   mutation updateStats($favourited: Int!, $userId: String!, $watched: Boolean!, $videoId: String!) {
     update_stats(

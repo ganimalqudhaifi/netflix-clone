@@ -1,5 +1,5 @@
 interface GQLVariables {
-  [propName: string]: string | number | boolean | null
+  [propName: string]: string | number | boolean | null;
 }
 
 interface Metadata {
@@ -9,34 +9,34 @@ interface Metadata {
 }
 
 interface StatsPayload {
-  favourited: number,
-  userId: string,
-  watched: boolean,
-  videoId: string,
+  favourited: number;
+  userId: string;
+  watched: boolean;
+  videoId: string;
 }
 
 interface Video {
-  id: string,
-  videoId: string,
-  imgUrl: string,
-  title: string, 
-  publishTime: string, 
-  description: string, 
-  channelTitle: string,
-  statistics: { 
-    viewCount: number 
-  }
+  id: string;
+  videoId: string;
+  imgUrl: string;
+  title: string;
+  publishTime: string;
+  description: string;
+  channelTitle: string;
+  statistics: {
+    viewCount: number;
+  };
 }
 
 interface YoutubeVideo {
-  id,
+  id;
   snippet: {
-    title: string, 
-    publishedAt: string, 
-    description: string, 
-    channelTitle: string,
-  },
+    title: string;
+    publishedAt: string;
+    description: string;
+    channelTitle: string;
+  };
   statistics: {
-    viewCount: number,
-  }
+    viewCount: number;
+  };
 }

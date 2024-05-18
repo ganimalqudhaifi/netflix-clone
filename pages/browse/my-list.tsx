@@ -13,23 +13,21 @@ export const getServerSideProps = (async (context) => {
     return {
       props: {
         myListVideos: [],
-      }
-    }
+      },
+    };
   }
 
   const videos = await getMyList(userId, token);
-    
+
   return {
     props: {
       myListVideos: videos,
-    }
-  }
-}) satisfies GetServerSideProps
-
-
+    },
+  };
+}) satisfies GetServerSideProps;
 
 interface MyListProps {
-  myListVideos: [Video]
+  myListVideos: [Video];
 }
 
 export default function MyList({ myListVideos }: MyListProps) {
@@ -40,11 +38,17 @@ export default function MyList({ myListVideos }: MyListProps) {
       </Head>
 
       <main className="pb-16 mt-24">
-        <Navbar/>
+        <Navbar />
         <div className="my-6">
-          <SectionCards title="My List" videos={myListVideos} size="small" shouldWrap shouldScale={false}/>
+          <SectionCards
+            title="My List"
+            videos={myListVideos}
+            size="small"
+            shouldWrap
+            shouldScale={false}
+          />
         </div>
       </main>
     </>
-  )
+  );
 }

@@ -1,17 +1,17 @@
-import Modal from 'react-modal';
+import Modal from "react-modal";
 import { useRouter } from "next/router";
 
 import Navbar from "@/components/Navbar";
-import LikeIcon from '@/components/icons/LikeIcon';
-import DislikeIcon from '@/components/icons/DislikeIcon';
+import LikeIcon from "@/components/icons/LikeIcon";
+import DislikeIcon from "@/components/icons/DislikeIcon";
 import { getYoutubeVideoById } from "@/lib/videos";
-import { useEffect, useState } from 'react';
-import type { GetStaticProps } from 'next';
+import { useEffect, useState } from "react";
+import type { GetStaticProps } from "next";
 
-Modal.setAppElement('#__next');
+Modal.setAppElement("#__next");
 
 interface VideoProps {
-  video: Video
+  video: Video;
 }
 
 export const getStaticProps = (async (context) => {
@@ -20,26 +20,26 @@ export const getStaticProps = (async (context) => {
   if (!videoId) {
     return {
       props: {
-        video: {}
-      }
-    }
+        video: {},
+      },
+    };
   }
 
-  const videoArray = await getYoutubeVideoById(videoId)
+  const videoArray = await getYoutubeVideoById(videoId);
 
   return {
     props: {
       video: videoArray[0],
     },
     revalidate: 10, // In seconds
-  }
-}) satisfies GetStaticProps
+  };
+}) satisfies GetStaticProps;
 
 export async function getStaticPaths() {
   const listOfVideos = ["mYfJxlgR2jw", "4zH5iYM4wJo", "KCPEHsAViiQ"];
   const paths = listOfVideos?.map((videoId) => ({
-    params: {videoId},
-  }))
+    params: { videoId },
+  }));
 
   return { paths, fallback: "blocking" };
 }
@@ -51,7 +51,13 @@ export default function Video({ video }: VideoProps) {
   const router = useRouter();
   const videoId = router.query.videoId;
 
-  const { title, publishTime, description, channelTitle, statistics: { viewCount } = { viewCount: 0 } } = video;
+  const {
+    title,
+    publishTime,
+    description,
+    channelTitle,
+    statistics: { viewCount } = { viewCount: 0 },
+  } = video;
 
   useEffect(() => {
     const handleLikeDislikeService = async () => {
@@ -83,7 +89,7 @@ export default function Video({ video }: VideoProps) {
         "Content-Type": "application/json",
       },
     });
-  }
+  };
 
   const handleToggleLike = async () => {
     const val = !toggleLike;
@@ -92,9 +98,9 @@ export default function Video({ video }: VideoProps) {
 
     const favourited = val ? 1 : 0;
     const response = await runRatingService(favourited);
-    
+
     console.log("data", await response.json());
-  }
+  };
 
   const handleToggleDislike = async () => {
     const val = !toggleDislike;
@@ -105,11 +111,11 @@ export default function Video({ video }: VideoProps) {
     const response = await runRatingService(favourited);
 
     console.log("data", await response.json());
-  }
+  };
 
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       <Modal
         isOpen={true}
         contentLabel="Watch this video"
@@ -117,20 +123,27 @@ export default function Video({ video }: VideoProps) {
         className="absolute w-full md:w-[800px] lg:w-1/2 lg:top-[10%] lg:bottom-10 bg-black40 border border-shadow10 mx-auto my-0 rounded-[10px] border-solid top-[10%] bottom-10 inset-x-0"
         overlayClassName="w-full h-screen inset-0"
       >
-        <div><iframe id="ytplayer" width="100%" height="360" className="shadow-[0_3px_7px] shadow-shadow20 bg-clip-padding opacity-100 bg-gradient-to-t from-black10 to-transparent rounded"
-  src={`https://www.youtube.com/embed/${videoId}?controls=0&rel=1&autoplay=1&origin=http://example.com`}></iframe></div>
+        <div>
+          <iframe
+            id="ytplayer"
+            width="100%"
+            height="360"
+            className="shadow-[0_3px_7px] shadow-shadow20 bg-clip-padding opacity-100 bg-gradient-to-t from-black10 to-transparent rounded"
+            src={`https://www.youtube.com/embed/${videoId}?controls=0&rel=1&autoplay=1&origin=http://example.com`}
+          ></iframe>
+        </div>
 
-        <div className='flex absolute mb-3 pl-4 top-[35%]'>
+        <div className="flex absolute mb-3 pl-4 top-[35%]">
           <button onClick={handleToggleLike}>
-            <div className='mr-2'>
-              <div className='border-white10 bg-gray40 flex justify-center p-2 rounded-full border-solid border-2'>
-                <LikeIcon selected={toggleLike}/>
+            <div className="mr-2">
+              <div className="border-white10 bg-gray40 flex justify-center p-2 rounded-full border-solid border-2">
+                <LikeIcon selected={toggleLike} />
               </div>
             </div>
           </button>
           <button onClick={handleToggleDislike}>
-            <div className='border-white10 bg-gray40 flex justify-center p-2 rounded-full border-solid border-2'>
-              <DislikeIcon selected={toggleDislike}/>
+            <div className="border-white10 bg-gray40 flex justify-center p-2 rounded-full border-solid border-2">
+              <DislikeIcon selected={toggleDislike} />
             </div>
           </button>
         </div>
@@ -138,7 +151,9 @@ export default function Video({ video }: VideoProps) {
         <div className="px-12 py-0">
           <div className="grid grid-cols-[minmax(0,2fr)_minmax(0,1fr)] gap-x-[2em]">
             <div className="max-h-[50vh] overflow-y-scroll">
-              <p className="text-lg leading-7 text-green10 mt-6 mb-2">{publishTime}</p>
+              <p className="text-lg leading-7 text-green10 mt-6 mb-2">
+                {publishTime}
+              </p>
               <p className="text-lg leading-7 text-white10">{title}</p>
               <p className="mt-3 mb-2">{description}</p>
             </div>
@@ -156,5 +171,5 @@ export default function Video({ video }: VideoProps) {
         </div>
       </Modal>
     </div>
-  )
+  );
 }
