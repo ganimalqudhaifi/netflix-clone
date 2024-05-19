@@ -17,3 +17,16 @@ export async function verifyToken(token: string) {
     return null;
   }
 }
+
+export async function getMetadataByToken(token: string) {
+  const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+
+  try {
+    const { payload } = await jwtVerify(token, secret);
+    return {
+      email: payload.email,
+    };
+  } catch (error) {
+    console.error({ error });
+  }
+}

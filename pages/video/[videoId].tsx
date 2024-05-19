@@ -64,7 +64,7 @@ export default function Video({ video }: VideoProps) {
       const response = await fetch(`/api/stats?videoId=${videoId}`, {
         method: "GET",
       });
-      const data = await response.json();
+      const { data } = await response.json();
 
       if (data.length > 0) {
         const favourited = data[0].favourited;
@@ -97,9 +97,7 @@ export default function Video({ video }: VideoProps) {
     setToggleDisLike(toggleLike);
 
     const favourited = val ? 1 : 0;
-    const response = await runRatingService(favourited);
-
-    console.log("data", await response.json());
+    await runRatingService(favourited);
   };
 
   const handleToggleDislike = async () => {
@@ -108,9 +106,7 @@ export default function Video({ video }: VideoProps) {
     setToggleLike(toggleDislike);
 
     const favourited = val ? 0 : 1;
-    const response = await runRatingService(favourited);
-
-    console.log("data", await response.json());
+    await runRatingService(favourited);
   };
 
   return (

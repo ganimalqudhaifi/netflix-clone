@@ -1,15 +1,14 @@
-import Head from "next/head";
 import type { GetServerSideProps } from "next";
-
+import Head from "next/head";
 import Banner from "@/components/Banner";
 import Navbar from "@/components/Navbar";
 import SectionCards from "@/components/SectionCards";
+import { redirectUser } from "@/utils/redirectUser";
 import {
   getPopularVideos,
   getVideos,
   getWatchItAgainVideos,
 } from "@/lib/videos";
-import { redirectUser } from "@/utils/redirectUser";
 
 interface HomeProps {
   disneyVideos: [Video];

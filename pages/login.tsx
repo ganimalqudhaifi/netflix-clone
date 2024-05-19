@@ -2,7 +2,6 @@ import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-
 import { magic } from "@/lib/magic-client";
 
 export default function Login() {
@@ -13,58 +12,57 @@ export default function Login() {
   const router = useRouter();
 
   useEffect(() => {
-    const handleRouteChange = () => {
-      setIsLoading(false);
-    };
-    router.events.on("routeChangeStart", handleRouteChange);
+    const handleRouteChange = () => setIsLoading(false);
+
+    router.events.on("routeChangeComplete", handleRouteChange);
     router.events.on("routeChangeError", handleRouteChange);
 
     return () => {
-      router.events.off("routeChangeStart", handleRouteChange);
+      router.events.off("routeChangeComplete", handleRouteChange);
       router.events.off("routeChangeError", handleRouteChange);
     };
   }, [router]);
 
   const handleOnChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserMsg("");
-    const email = e.target.value;
-    setEmail(email);
+    setEmail(e.target.value);
   };
 
   const handleLoginWithEmail = async () => {
-    if (email) {
-      // route to dashboard
-      try {
-        setIsLoading(true);
-        if (magic !== undefined) {
-          const didToken = await magic.auth.loginWithMagicLink({ email });
-          if (didToken) {
-            const response = await fetch("/api/login", {
-              method: "POST",
-              headers: {
-                Authorization: `Bearer ${didToken}`,
-                "Content-Type": "application/json",
-              },
-            });
+    if (!email) {
+      setUserMsg("Enter a valid email address");
+      return;
+    }
 
-            const loggedInResponse = await response.json();
-            if (loggedInResponse.done) {
-              router.push("/"); // if the did token was created route to homepage
-            } else {
-              setIsLoading(false);
-              setUserMsg("Something went wrong logging in");
-            }
+    setIsLoading(true);
+
+    try {
+      if (magic !== undefined) {
+        const didToken = await magic.auth.loginWithMagicLink({ email });
+
+        if (didToken) {
+          const response = await fetch("/api/login", {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${didToken}`,
+              "Content-Type": "application/json",
+            },
+          });
+
+          const loggedInResponse = await response.json();
+          if (loggedInResponse.success) {
+            router.push("/");
+          } else {
+            throw new Error("Login failed");
           }
         }
-      } catch (error) {
-        // Handle errors if required!
-        console.error("Something went wrong logging in", error);
-        setIsLoading(false);
+      } else {
+        throw new Error("Magic instance is not available");
       }
-    } else {
-      // show user message
+    } catch (error) {
+      console.error("Error logging in", error);
+      setUserMsg("Something went wrong logging in");
       setIsLoading(false);
-      setUserMsg("Enter a valid email address");
     }
   };
 
@@ -104,6 +102,7 @@ export default function Login() {
           <button
             className="bg-red10 text-xl leading-7 text-white10 w-full mt-6 px-12 py-2 rounded-md"
             onClick={handleLoginWithEmail}
+            disabled={isLoading}
           >
             {isLoading ? "Loading..." : "Sign In"}
           </button>

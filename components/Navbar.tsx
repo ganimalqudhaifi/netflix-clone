@@ -3,27 +3,25 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { SyntheticEvent, useEffect, useState } from "react";
 
-import { magic } from "@/lib/magic-client";
-
 export default function Navbar() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [username, setUsername] = useState("");
-  const [didToken, setDidToken] = useState("");
 
   const router = useRouter();
 
   useEffect(() => {
-    async function getUserName() {
+    async function getMetadata() {
       try {
-        const { email } = await magic!.user.getInfo();
-        const didToken = await magic!.user.getIdToken();
-        setDidToken(didToken);
-        setUsername(email!);
+        const response = await fetch("/api/user");
+        const data = await response.json();
+        const email = data?.metadata?.email;
+
+        setUsername(email);
       } catch (error) {
         console.error("Error retrieving email", error);
       }
     }
-    getUserName();
+    getMetadata();
   }, []);
 
   const handleOnClickHome = (e: SyntheticEvent) => {
@@ -42,16 +40,7 @@ export default function Navbar() {
 
   const handleSignOut = async () => {
     try {
-      const response = await fetch("/api/logout", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${didToken}`,
-          "Content-Type": "application/json",
-        },
-      });
-
-      const res = await response.json();
-      console.log({ res });
+      await fetch("/api/logout");
     } catch (error) {
       console.error("Error logging out", error);
       router.push("/login");

@@ -57,40 +57,36 @@ By completing this project, you'll gain hands-on experience in:
 - Handling state management in large-scale applications.
  -->
 
-# API Documentation
+## API Documentation
 
-POST "/api/login"
+### POST "/api/login"
 
 - Description: Fetch user to login and signing token
 - Headers:
   - Authorization: `Bearer ${didToken}`
-    <!-- - Responses: -->
-      <!-- - 200: { id: string, name: string, email: string } -->
 
-POST "/api/logout"
+### POST "/api/logout"
 
 - Description: Fetch user to logout and removing token
 - Headers:
   - Authorization: `Bearer ${didToken}`
-    <!-- - Responses: -->
-      <!-- - 200: { id: string, name: string, email: string } -->
 
-POST "/api/stats"
+### POST "/api/stats"
 
 - Description: Fetch rating service for inserting or updating stats of video
 - Body:
   - videoId (string): Video Id
   - favourited (number 1 or 0): Like or Dislike
-    <!-- - Responses: -->
-      <!-- - 200: { id: string, name: string, email: string } -->
+- Responses: -->
+  - 200: { userId: string, videoId: string, favourited: number, watched: boolean }
 
-GET "/api/stats?videoId=${videoId}"
+### GET "/api/stats?videoId=${videoId}"
 
 - Description: Fetch like or dislike service by videoId
 - Parameters:
   - videoId (string): Video Id
-    <!-- - Responses: -->
-      <!-- - 200: { id: string, name: string, email: string } -->
+- Responses: -->
+  - 200: { id: string, userId: string, videoId: string, favourited: number, watched: boolean }
 
 # .env.local
 
