@@ -26,7 +26,7 @@ export default function Banner({
         <div className="flex justify-start pl-16 pr-16 h-full flex-col mt-24 md:w-2/5">
           <div className="flex">
             <p className="text-6xl font-extrabold text-red">N</p>
-            <p className="text-sm text-gray20 self-center">S E R I E S</p>
+            <p className="text-sm text-white30 self-center">S E R I E S</p>
           </div>
           <h3
             className="text-2xl font-extrabold text-white10 lg:text-6xl"
