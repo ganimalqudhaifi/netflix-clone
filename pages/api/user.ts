@@ -1,9 +1,9 @@
-import { getMetadataByToken } from "@/lib/utils";
 import { NextApiRequest, NextApiResponse } from "next";
+import { getMetadataByToken } from "@/lib/utils";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   const token = req.cookies.token;
   if (!token) {

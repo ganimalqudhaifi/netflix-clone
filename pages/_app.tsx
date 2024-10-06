@@ -1,6 +1,5 @@
 import type { AppProps } from "next/app";
 import { Roboto_Slab } from "next/font/google";
-
 import "@/styles/globals.css";
 
 const RobotoSlab = Roboto_Slab({ subsets: ["latin"] });

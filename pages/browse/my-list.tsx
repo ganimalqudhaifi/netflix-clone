@@ -1,10 +1,9 @@
-import Head from "next/head";
 import type { GetServerSideProps } from "next";
-
+import Head from "next/head";
 import Navbar from "@/components/Navbar";
 import SectionCards from "@/components/SectionCards";
-import { redirectUser } from "@/utils/redirectUser";
 import { getMyList } from "@/lib/videos";
+import { redirectUser } from "@/utils/redirectUser";
 
 export const getServerSideProps = (async (context) => {
   const { userId, token } = await redirectUser(context);

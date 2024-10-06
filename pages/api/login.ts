@@ -1,8 +1,8 @@
-import type { NextApiRequest, NextApiResponse } from "next";
 import jwt from "jsonwebtoken";
-import { magicAdmin } from "@/lib/magic";
+import type { NextApiRequest, NextApiResponse } from "next";
 import { setTokenCookie } from "@/lib/cookies";
-import { isNewUser, createNewUser } from "@/lib/db/hasura";
+import { createNewUser, isNewUser } from "@/lib/db/hasura";
+import { magicAdmin } from "@/lib/magic";
 
 export default async function login(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
@@ -57,6 +57,6 @@ function generateJwtToken(metadata: any, secretKey: string): string {
         "x-hasura-user-id": `${metadata.issuer}`,
       },
     },
-    secretKey
+    secretKey,
   );
 }

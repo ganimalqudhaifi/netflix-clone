@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { removeTokenCookie } from "@/lib/cookies";
 import { magicAdmin } from "@/lib/magic";
 import { verifyToken } from "@/lib/utils";
-import { removeTokenCookie } from "@/lib/cookies";
 
 export default async function logout(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   const token = req.cookies.token;
 

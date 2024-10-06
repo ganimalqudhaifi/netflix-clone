@@ -1,12 +1,11 @@
-import Modal from "react-modal";
-import { useRouter } from "next/router";
-
-import Navbar from "@/components/Navbar";
-import LikeIcon from "@/components/icons/LikeIcon";
-import DislikeIcon from "@/components/icons/DislikeIcon";
-import { getYoutubeVideoById } from "@/lib/videos";
-import { useEffect, useState } from "react";
 import type { GetStaticProps } from "next";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import Modal from "react-modal";
+import Navbar from "@/components/Navbar";
+import DislikeIcon from "@/components/icons/DislikeIcon";
+import LikeIcon from "@/components/icons/LikeIcon";
+import { getYoutubeVideoById } from "@/lib/videos";
 
 Modal.setAppElement("#__next");
 

@@ -1,9 +1,9 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { SyntheticEvent, useEffect, useState } from "react";
-import { Button } from "./ui/button";
 import HamburgerMenuIcon from "./icons/HamburgerMenuIcon";
+import { Button } from "./ui/button";
 
 export default function Navbar() {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -85,7 +85,7 @@ export default function Navbar() {
                 Home
               </li>
               <li
-                className="text-center w-full md:w-fit font-semibold text-base cursor-pointer px-4 py-2 md:px-0 hover:bg-zinc-800 border-b-2 border-zinc-800 md:border-b-0 md:hover:bg-transparent"
+                className="text-center w-full md:w-fit font-semibold text-base cursor-pointer px-4 py-2   md:px-0 hover:bg-zinc-800 border-b-2 border-zinc-800 md:border-b-0 md:hover:bg-transparent"
                 onClick={handleOnClickMyList}
               >
                 My List

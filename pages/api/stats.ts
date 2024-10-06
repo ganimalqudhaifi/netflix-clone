@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { verifyToken } from "@/lib/utils";
 import { findVideoIdByUser, insertStats, updateStats } from "@/lib/db/hasura";
+import { verifyToken } from "@/lib/utils";
 
 export default async function stats(req: NextApiRequest, res: NextApiResponse) {
   const token = req.cookies.token;
@@ -39,7 +39,7 @@ async function handlePostRequest(
   res: NextApiResponse,
   token: string,
   userId: string,
-  videoId: string
+  videoId: string,
 ) {
   try {
     const { favourited, watched = true } = req.body;
@@ -73,7 +73,7 @@ async function handleGetRequest(
   res: NextApiResponse,
   token: string,
   userId: string,
-  videoId: string
+  videoId: string,
 ) {
   try {
     const videoStats = await findVideoIdByUser(token, userId, videoId);

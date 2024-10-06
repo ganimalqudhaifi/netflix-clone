@@ -1,6 +1,6 @@
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { type ClassValue, clsx } from "clsx";
 import { jwtVerify } from "jose";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -11,7 +11,7 @@ export async function verifyToken(token: string) {
     if (token) {
       const verified = await jwtVerify(
         token,
-        new TextEncoder().encode(process.env.JWT_SECRET)
+        new TextEncoder().encode(process.env.JWT_SECRET),
       );
       return typeof verified.payload.issuer === "string"
         ? verified.payload.issuer

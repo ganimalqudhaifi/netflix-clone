@@ -1,6 +1,5 @@
-import type { NextApiResponse } from "next";
-
 import cookie from "cookie";
+import type { NextApiResponse } from "next";
 
 const MAX_AGE = 7 * 24 * 60 * 60;
 
